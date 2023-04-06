@@ -3,6 +3,8 @@ const app = express();
 
 const http = require('http').createServer(app);
 
+const io = require('socket.io')(http);
+
 const PORT = process.env.PORT || 3000;
 
 app.use(express.static(__dirname + '/public'))
@@ -13,4 +15,8 @@ app.get('/', (req,res) => {
 
 http.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
+})
+
+io.on('connection', (socket) => {
+    console.log('Connected...');
 })
